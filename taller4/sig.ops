@@ -1,0 +1,7 @@
+0x09:                                           ; SIG
+    RB_enOut  ALU_enA  RB_selectIndexOut=0      ; ALU_A := Registro
+    ALU_OP=cte0x01 
+    ALU_enOut ALU_enB                           ; ALU_B = 0x01
+    ALU_OP = 0001                               ; OPcode ALU ADD = 0001
+    RB_enIn ALU_enOut RB_selectIndexIn=0        ; Registro := ALU_OUT
+    reset_microOp
