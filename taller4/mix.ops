@@ -1,3 +1,0 @@
-0x0B :                          ; MIX
-RB_enOut ALU_enA RB_outSelect   ; ALU_A = Registro
-RB_enOut ALU_enB RB_outSelect   ; ALU_B = Registro
