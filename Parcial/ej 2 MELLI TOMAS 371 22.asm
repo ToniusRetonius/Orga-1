@@ -6,14 +6,14 @@ main:
     la a1, dst
     li a2, 12
     call XorEspejo
-    la ra, dst
+    la a3, dst
 check: 
-    lw s4, 0(ra)
-    lw s5, 4(ra)
-    lw s6, 8(ra)
-    lw s7, 12(ra)
-    lw s8, 16(ra)
-    lw s9, 20(ra)
+    lw s4, 0(a3)
+    lw s5, 4(a3)
+    lw s6, 8(a3)
+    lw s7, 12(a3)
+    lw s8, 16(a3)
+    lw s9, 20(a3)
 
 halt: j halt
 

@@ -8,11 +8,20 @@ main:
     la a0, arr
     li a1, 12
     call OrIterativo
-    
-halt: j halt
+
+exit:
+    # Imprime la suma
+    mv a0, t4
+    li a7, 34
+    ecall
+
+    # Termina el programa.
+    li a0, 0
+    li a7, 93
+    ecall    
 
 OrIterativo:
-     # cargo en s0 la dirección que tengo en a0 para poder ir moviendome de una posicion impar a la siguiente dentro del loop offseteado para que comience en la posicion impar
+     # cargo en s0 la direcci?n que tengo en a0 para poder ir moviendome de una posicion impar a la siguiente dentro del loop offseteado para que comience en la posicion impar
      # la longitud del array en s1 
      # importante la return adrr por tanto uso s2 = ra
      # inicializo s3 en 0x00 para guardarme los resultados del OR
@@ -43,20 +52,10 @@ loop:
     j loop
     
 return:
-    # ya tenemos s3 calculado y nos queda ponerlo en el registro apropiado para valores de retorno
-    mv a0, s3
+    # ya tenemos s3 calculado y nos queda ponerlo en el registro apropiado para que lo muestre x consola
+    mv t4, s3
     ret
-exit:
-    # Imprime la suma
-    mv a0, t4
-    li a7, 34
-    ecall
-
-    # Termina el programa.
-    li a0, 0
-    li a7, 93
-    ecall
-
+    
 .data:
 arr:
 .word	0xffffffff, 0x95555555, 0xf4444444, 0xf1111111
