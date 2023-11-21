@@ -1,6 +1,5 @@
-# la idea ser? tomar un elemento del src y realizarle un XOR con su respectivo elemento
-# en el dst. La idea ser? iterar simultaneamente los arrays 
-# la idea ser? modificar el array dst con los resultados del XOR 
+# la idea será tomar un elemento del src y realizarle un XOR con su respectivo elemento
+# en el dst. Buscaré iterar simultaneamente los arrays y modificar el array dst con los resultados del XOR 
 main:
     la a0, src
     la a1, dst
@@ -36,13 +35,13 @@ XorEspejo:
     mv s2, a2
     
 loop:
-    # mi res ser? manipulado en s3
+    # mi res será manipulado en s3
     mv s3, x0
-    # condici?n de ciclo y i--;
+    # condición de ciclo y i--;
     beqz s2, return
     addi s2,s2,-1
     
-    # cargo la data en mis registro de arg de funci?n
+    # cargo la data en mis registro de arg de función
     lw a0, 0(s0)
     lw a1, 0(s1)
     
@@ -62,9 +61,7 @@ loop:
      
     j loop
 return: 
-    # queremos devolver el inicio del array modificado dst
-    # y eso coincide con la etiqueta .dst
-    la a1, dst
+    # tenemos que volver a donde apuntaba el pc luego del call
     ret
 
 .data:

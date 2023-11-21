@@ -1,9 +1,8 @@
-    # mi idea sera iterativamente hacer el or sobre los valores del arreglo de
-    # 12 elementos de 32 bits que ocupan posiciones impares
-    # para lograrlo,
+# mi idea sera iterativamente hacer el or sobre los valores del arreglo de
+# 12 elementos de 32 bits que ocupan posiciones impares
+# para lograrlo,
         # hago un load adrr en a0 de la etiqueta Data 
         # hago un load imm en a1 de la length     
-.main:
 main:
     la a0, arr
     li a1, 12
@@ -11,7 +10,8 @@ main:
 
 exit:
     # Imprime la suma
-    mv a0, t4
+    # ya tenemos s3 calculado y nos queda ponerlo en el registro apropiado para que lo muestre x consola
+    mv a0, s3
     li a7, 34
     ecall
 
@@ -34,7 +34,7 @@ loop:
     # condicion de ciclo
     beqz s1, return
     
-    # i -2;
+    # i = i - 2;
     addi s1, s1, -2
     
     # necesito tener el elemento a comparar 
@@ -52,8 +52,6 @@ loop:
     j loop
     
 return:
-    # ya tenemos s3 calculado y nos queda ponerlo en el registro apropiado para que lo muestre x consola
-    mv t4, s3
     ret
     
 .data:

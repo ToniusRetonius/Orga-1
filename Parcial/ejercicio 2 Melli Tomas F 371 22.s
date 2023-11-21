@@ -1,60 +1,11 @@
-# la idea será tomar un elemento del src y realizarle un XOR con su respectivo elemento
-# en el dst. La idea será iterar simultaneamente los arrays 
-# la idea será modificar el array dst con los resultados del XOR 
+# la idea ser? tomar un elemento del src y realizarle un XOR con su respectivo elemento
+# en el dst. La idea ser? iterar simultaneamente los arrays 
+# la idea ser? modificar el array dst con los resultados del XOR 
 main:
     la a0, src
     la a1, dst
     li a2, 12
     call XorEspejo
-    la a3, dst
-check: 
-    lw s4, 0(a3)
-    lw s5, 4(a3)
-    lw s6, 8(a3)
-    lw s7, 12(a3)
-    lw s8, 16(a3)
-    lw s9, 20(a3)
-
-halt: j halt
-
-XorEspejo:
-    # me guardo de donde empiezan los arr para poder offsetear al sig elem
-    mv s0, a0
-    mv s1, a1
-    # me guardo la length
-    mv s2, a2
-    
-loop:
-    # mi res será manipulado en s3
-    mv s3, x0
-    # condición de ciclo y i--;
-    beqz s2, return
-    addi s2,s2,-1
-    
-    # cargo la data en mis registro de arg de función
-    lw a0, 0(s0)
-    lw a1, 0(s1)
-    
-    # ejecuto la operación 
-    # XOR rd,rs1,rs2 
-    # podría usar el stack para guardarme todas las comp y hacer un pop luego? 
-    # quedaría desordenada
-    # para hacer esto utilizo store word
-    # SW rs2, offset(rs1)
-    # almacena los cuatro bytes menos sign del registro x[rs2] a memoria en la dirección x[rs1] + sign-ext(offset)
-    xor s3, a0, a1
-    sw s3, 0(s1)
-    
-    # quiero mover la pos de lectura de datos tanto en src como en dst
-    addi s0,s0, 4
-    addi s1,s1,4
-     
-    j loop
-return: 
-    # queremos devolver el inicio del array modificado dst
-    # y eso coincide con la etiqueta .dst
-    la a1, dst
-    ret
     
 imprimir:
     la t2, dst
@@ -76,6 +27,45 @@ exit:
     li a0, 0
     li a7, 93
     ecall
+
+XorEspejo:
+    # me guardo de donde empiezan los arr para poder offsetear al sig elem
+    mv s0, a0
+    mv s1, a1
+    # me guardo la length
+    mv s2, a2
+    
+loop:
+    # mi res ser? manipulado en s3
+    mv s3, x0
+    # condici?n de ciclo y i--;
+    beqz s2, return
+    addi s2,s2,-1
+    
+    # cargo la data en mis registro de arg de funci?n
+    lw a0, 0(s0)
+    lw a1, 0(s1)
+    
+    # ejecuto la operaci?n 
+    # XOR rd,rs1,rs2 
+    # podr?a usar el stack para guardarme todas las comp y hacer un pop luego? 
+    # quedar?a desordenada
+    # para hacer esto utilizo store word
+    # SW rs2, offset(rs1)
+    # almacena los cuatro bytes menos sign del registro x[rs2] a memoria en la direcci?n x[rs1] + sign-ext(offset)
+    xor s3, a0, a1
+    sw s3, 0(s1)
+    
+    # quiero mover la pos de lectura de datos tanto en src como en dst
+    addi s0,s0, 4
+    addi s1,s1,4
+     
+    j loop
+return: 
+    # queremos devolver el inicio del array modificado dst
+    # y eso coincide con la etiqueta .dst
+    la a1, dst
+    ret
 
 .data:
 src:
