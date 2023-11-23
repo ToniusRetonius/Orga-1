@@ -1,0 +1,41 @@
+Main:
+	SET R1, 0x0F 	; GUARDO MAX
+	SET R0, 0x0C 	; GUARDO CURVA
+	SET R3, rai
+	SET R4, 0x02 	; intensidad actual bocina
+	SET R5, 0x20 	; 32
+	SET R6, 0x0F 	; valor actual velocidad
+	SET R7, 0x00 	; contador curvas
+	STR [0xF1], R4
+	STR [0x00], R3
+	STI
+	
+loop:
+	STR [0xF0], R6
+	JMP loop
+
+rai:
+	CMP R6, R0
+	JZ Subir
+	JMP Bajar
+
+Subir:
+	MOV R6, R1
+	INC R4
+	CMP R7, R5
+	JZ bocina
+	JMP fin
+
+Bajar:
+	MOV R6, R0
+	JMP fin	
+
+bocina:
+	INC R4
+	SET R7, 0x00
+	STR [0xF1], R4
+	
+fin:
+	IRET
+	
+; EL FLUJO DE INFORMACIÓN ES DE REGISTRO A MEMORIA DE MEMORIA A DISPOSITIVO EN ESTE ESCENARIO
